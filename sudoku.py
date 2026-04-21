@@ -101,6 +101,18 @@ def draw_end_screen(screen, fonts, won, button):
 
     button.draw(screen, fonts["button"])
 
+def print_solution(solution):
+    print("\n--- SOLUTION ---")
+    for i, row in enumerate(solution):
+        if i % 3 == 0 and i != 0:
+            print("------+-------+------")
+        row_str = ""
+        for j, val in enumerate(row):
+            if j % 3 == 0 and j != 0:
+                row_str += " | "
+            row_str += str(val) + " "
+        print(row_str)
+    print("----------------\n")
 
 def main():
     pygame.init()
@@ -147,12 +159,15 @@ def main():
                     if easy_button.is_clicked(mouse_pos):
                         board = Board(WIDTH, HEIGHT, screen, 30)
                         state = "game"
+                        print_solution(board.solution)
                     elif medium_button.is_clicked(mouse_pos):
                         board = Board(WIDTH, HEIGHT, screen, 40)
                         state = "game"
+                        print_solution(board.solution)
                     elif hard_button.is_clicked(mouse_pos):
                         board = Board(WIDTH, HEIGHT, screen, 50)
                         state = "game"
+                        print_solution(board.solution)
 
                 elif state == "game":
                     clicked_cell = board.click(mouse_pos[0], mouse_pos[1])
